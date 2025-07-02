@@ -79,11 +79,10 @@ class MainActivity : AppCompatActivity() {
                 val addresses = geocoder.getFromLocation(lat, lon, 1)
                 if (addresses != null && addresses.isNotEmpty()) {
                     val address = addresses[0]
-                    // Adresin tüm kısımlarını birleştir
                     val fullAddress = buildString {
                         append("Şu anda siz; ")
-                        append(address.getAddressLine(0)) // Tam adres satırı
-                        append(" civarındasınız.")
+                        append(address.getAddressLine(0))
+                        append(" civarındasınız. 🚩")
                     }
                     runOnUiThread {
                         txtAddress.text = fullAddress
