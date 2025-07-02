@@ -9,11 +9,10 @@ android {
 
     defaultConfig {
         applicationId = "com.example.melisamobil"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -36,12 +35,15 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.android.gms:play-services-location:21.2.0") // <-- BU ÖNEMLİ!
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
