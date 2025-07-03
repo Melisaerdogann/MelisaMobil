@@ -16,15 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MelisaMobil"
         tools:targetApi="31">
+
+        <!-- SplashActivity launcher olarak ayarlandı -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity normal ekran -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

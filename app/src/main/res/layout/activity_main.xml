@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- İstanbul için arka plan resmi -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.7"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="24dp">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/txtWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/txtBaslik"
+            android:layout_width="323dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="MelisaMobil'e Hoşgeldiniz! 🙌"
+            android:textColor="@color/textPrimary"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnKonum"
+            style="@style/MelisaButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Konumumu Göster 📍" />
+            android:text="Konumumu Göster 📍"
+            android:layout_marginBottom="24dp"/>
 
         <TextView
             android:id="@+id/txtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_marginTop="20dp"
-            android:textSize="16sp" />
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@color/textPrimary"
+            android:gravity="center"
+            android:background="@drawable/address_button_border"
+            android:padding="12dp"/>
     </LinearLayout>
 </FrameLayout>

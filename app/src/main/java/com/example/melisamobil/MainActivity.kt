@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnKonum: Button
     private lateinit var txtAddress: TextView
+    private lateinit var backgroundImage: ImageView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,9 +28,11 @@ class MainActivity : AppCompatActivity() {
 
         btnKonum = findViewById(R.id.btnKonum)
         txtAddress = findViewById(R.id.txtAddress)
+        backgroundImage = findViewById(R.id.backgroundImage)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         txtAddress.text = ""
+        backgroundImage.visibility = ImageView.GONE // İlk başta görünmesin
 
         btnKonum.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -63,12 +67,15 @@ class MainActivity : AppCompatActivity() {
                     getAddressFromGeocoder(location.latitude, location.longitude)
                 } else {
                     txtAddress.text = "Konum alınamadı. Lütfen konumu açın."
+                    backgroundImage.visibility = ImageView.GONE
                 }
             }.addOnFailureListener {
                 txtAddress.text = "Konum alınırken hata oluştu."
+                backgroundImage.visibility = ImageView.GONE
             }
         } catch (e: SecurityException) {
             txtAddress.text = "Konum izni verilmedi."
+            backgroundImage.visibility = ImageView.GONE
         }
     }
 
@@ -84,17 +91,35 @@ class MainActivity : AppCompatActivity() {
                         append(address.getAddressLine(0))
                         append(" civarındasınız. 🚩")
                     }
+                    val city = address.locality ?: address.adminArea ?: ""
+
                     runOnUiThread {
                         txtAddress.text = fullAddress
+                        // Şehre göre arka plan değişimi
+                        when {
+                            city.contains("İstanbul", true) || city.contains("Istanbul", true) -> {
+                                backgroundImage.setImageResource(R.drawable.background_istanbul)
+                                backgroundImage.visibility = ImageView.VISIBLE
+                            }
+                            city.contains("Kocaeli", true) -> {
+                                backgroundImage.setImageResource(R.drawable.background_kocaeli)
+                                backgroundImage.visibility = ImageView.VISIBLE
+                            }
+                            else -> {
+                                backgroundImage.visibility = ImageView.GONE
+                            }
+                        }
                     }
                 } else {
                     runOnUiThread {
                         txtAddress.text = "Adres alınamadı."
+                        backgroundImage.visibility = ImageView.GONE
                     }
                 }
             } catch (e: Exception) {
                 runOnUiThread {
                     txtAddress.text = "Adres alınırken hata oluştu: ${e.localizedMessage}"
+                    backgroundImage.visibility = ImageView.GONE
                 }
             }
         }.start()
