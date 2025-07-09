@@ -37,7 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Konumumu Göster 📍"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_background_transparent"/>
+
+
 
         <TextView
             android:id="@+id/txtAddress"
@@ -46,9 +49,9 @@
             android:layout_marginTop="20dp"
             android:text=""
             android:textSize="16sp"
-            android:textColor="@color/textPrimary"
+            android:textColor="@android:color/black"
             android:gravity="center"
-            android:background="@drawable/address_button_border"
+            android:background="@drawable/address_bg_transparent"
             android:padding="12dp"/>
     </LinearLayout>
 </FrameLayout>
